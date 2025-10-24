@@ -1,11 +1,9 @@
 ---
 const basePath = Astro.site ? new URL(Astro.site).pathname.replace(/\/$/, '') : '';
 const nav = [
-  { href: `${basePath}/`, label: 'Home' },
   { href: `${basePath}/blog`, label: 'Blog' },
-  { href: `${basePath}/about`, label: 'About' },
-  { href: `${basePath}/contact`, label: 'Contact' },
-  { href: `${basePath}/projects`, label: 'Projects' },
+  { href: `${basePath}/about`, label: 'Về tôi' },
+  { href: `${basePath}/thanh-tich`, label: 'Thành tích' },
 ];
 ---
 <header class="site">
