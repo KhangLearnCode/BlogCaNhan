@@ -5,13 +5,28 @@ import Footer from '../../components/Footer.astro';
 import PostCard from '../../components/PostCard.astro';
 import { slugify } from '../../lib/slug';
 
-const all = await Astro.glob('../blog/*.md');
-const current = Astro.params.tag!;
-const posts = all
-  .filter(p => (p.frontmatter.tags || []).some((t: string) => slugify(t) === current))
-  .sort((a,b)=> new Date(b.frontmatter.pubDate||0).getTime() - new Date(a.frontmatter.pubDate||0).getTime());
+// Tạo danh sách đường dẫn tĩnh cho mọi tag
+export async function getStaticPaths() {
+  const all = await Astro.glob('../blog/*.md');
+  const tags = new Set<string>();
+  for (const p of all) {
+    (p.frontmatter.tags || []).forEach((t: string) => tags.add(t));
+  }
+  return Array.from(tags).map((t) => ({
+    params: { tag: slugify(t) },
+    props: { humanTag: t },
+  }));
+}
 
-const humanTag = posts.length ? (posts[0].frontmatter.tags.find((t:string)=> slugify(t)===current) ?? current) : current;
+const basePath = Astro.site ? new URL(Astro.site).pathname.replace(/\/$/, '') : '';
+const current = Astro.params.tag!;
+const { humanTag } = Astro.props as { humanTag: string };
+
+// Lọc bài theo slug của tag hiện tại
+const all = await Astro.glob('../blog/*.md');
+const posts = all
+  .filter((p) => (p.frontmatter.tags || []).some((t: string) => slugify(t) === current))
+  .sort((a,b)=> new Date(b.frontmatter.pubDate||0).getTime() - new Date(a.frontmatter.pubDate||0).getTime());
 ---
 <BaseLayout title={`Tag: ${humanTag} • Lê Nguyễn Duy Khang`} description={`Các bài viết có tag: ${humanTag}`}>
   <Nav />
@@ -28,6 +43,7 @@ const humanTag = posts.length ? (posts[0].frontmatter.tags.find((t:string)=> slu
         />
       ))}
     </div>
+    <div style="margin-top:14px"><a class="btn" href={`${basePath}/blog`}>← Quay lại Blog</a></div>
   </main>
   <Footer />
 </BaseLayout>
