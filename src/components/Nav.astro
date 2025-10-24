@@ -1,18 +1,17 @@
 ---
+const basePath = Astro.site ? new URL(Astro.site).pathname.replace(/\/$/, '') : '';
 const nav = [
-  { href: '/BlogCaNhan/', label: 'Home' },
-  { href: '/BlogCaNhan/blog/', label: 'Blog' },
-  { href: '/BlogCaNhan/about/', label: 'About' },
-  { href: '/BlogCaNhan/contact/', label: 'Contact' },
-  { href: '/BlogCaNhan/projects/', label: 'Projects' },
+  { href: `${basePath}/`, label: 'Home' },
+  { href: `${basePath}/blog`, label: 'Blog' },
+  { href: `${basePath}/about`, label: 'About' },
+  { href: `${basePath}/contact`, label: 'Contact' },
+  { href: `${basePath}/projects`, label: 'Projects' },
 ];
-// Prefix base cho ảnh/logo
-const basePath = Astro.site ? new URL(Astro.site).pathname.replace(/\/$/, '') + '/' : '/';
 ---
 <header class="site">
   <div class="container nav">
-    <a class="logo" href="/BlogCaNhan/">
-      <img src={`${basePath}images/js.svg`} alt="logo" width="22" height="22" />
+    <a class="logo" href={`${basePath}/`}>
+      <img src={`${basePath}/images/js.svg`} alt="logo" width="22" height="22" />
       <span><b>Lê Nguyễn Duy Khang</b> – Blog cá nhân</span>
     </a>
     <nav class="menu">
@@ -20,6 +19,3 @@ const basePath = Astro.site ? new URL(Astro.site).pathname.replace(/\/$/, '') + 
     </nav>
   </div>
 </header>
-
-
-
