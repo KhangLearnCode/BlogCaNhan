@@ -6,11 +6,13 @@ const nav = [
   { href: '/contact', label: 'Contact' },
   { href: '/projects', label: 'Projects' },
 ];
+// Prefix base cho ảnh/logo
+const basePath = Astro.site ? new URL(Astro.site).pathname.replace(/\/$/, '') + '/' : '/';
 ---
 <header class="site">
   <div class="container nav">
     <a class="logo" href="/">
-      <img src="/images/js.svg" alt="logo" width="22" height="22" />
+      <img src={`${basePath}images/js.svg`} alt="logo" width="22" height="22" />
       <span><b>Lê Nguyễn Duy Khang</b> – Blog cá nhân</span>
     </a>
     <nav class="menu">
