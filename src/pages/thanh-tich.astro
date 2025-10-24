@@ -1,1 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
 
+const achievements = [
+  {
+    year: '2025',
+    title: 'Demo Socket Chat (Java + WebSocket)',
+    desc: 'Xây dựng mẫu chat thời gian thực, quản lý kết nối, broadcast message.',
+    tags: ['Java','WebSocket','Networking'],
+  },
+  {
+    year: '2024',
+    title: 'REST API Notes (Spring Boot)',
+    desc: 'API CRUD ghi chú, phân lớp Controller/Service/Repository, trả về JSON chuẩn.',
+    tags: ['Java','Spring Boot','REST'],
+  },
+  {
+    year: '2024',
+    title: 'Triển khai CI/CD đơn giản với GitHub Actions',
+    desc: 'Build SSG Astro, upload artifact và deploy GitHub Pages tự động.',
+    tags: ['CI/CD','GitHub Actions','Astro'],
+  },
+];
+---
+<BaseLayout title="Thành tích • Lê Nguyễn Duy Khang" description="Một số dự án và thành tích học tập/cá nhân tiêu biểu.">
+  <Nav />
+  <main class="container section">
+    <h1>Thành tích</h1>
+    <div class="grid">
+      {achievements.map((a) => (
+        <div class="card">
+          <div class="meta">{a.year}</div>
+          <h3>{a.title}</h3>
+          <p style="color:var(--muted)">{a.desc}</p>
+          <div class="tags">
+            {a.tags.map((t) => <span class="tag">{t}</span>)}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <section style="margin-top:22px">
+      <div class="card" style="max-width:900px">
+        <h2 style="margin:.2rem 0 8px">Chứng chỉ / Hoạt động</h2>
+        <ul>
+          <li>Tham gia các đồ án lập trình mạng (TCP/UDP Socket, WebSocket) và chia sẻ lại trên blog.</li>
+          <li>Xây dựng blog cá nhân (Astro SSG) và tự động hoá triển khai bằng GitHub Actions.</li>
+          <li>Đóng góp open-source nhỏ: tối ưu layout, fix CSS, viết bài kỹ thuật.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
