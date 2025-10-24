@@ -15,7 +15,7 @@ const {
 const fullTitle = title;
 const kw = keywords.join(', ');
 
-// Prefix cho tài nguyên tĩnh khi deploy dưới subpath (ví dụ /BlogCaNhan)
+// Prefix khi deploy dưới subpath (ví dụ: /BlogCaNhan)
 const basePath = Astro.site ? new URL(Astro.site).pathname.replace(/\/$/, '') + '/' : '/';
 ---
 <!DOCTYPE html>
@@ -31,12 +31,12 @@ const basePath = Astro.site ? new URL(Astro.site).pathname.replace(/\/$/, '') + 
     <meta property="og:type" content="website" />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={`${basePath}images/avatar.svg`} />
+    <meta property="og:image" content={`${basePath}images/avatar.jpg`} />
     <meta property="og:locale" content="vi_VN" />
 
     <link rel="icon" href={`${basePath}images/js.svg`} />
     <link rel="canonical" href={Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : Astro.url.pathname} />
-    <link rel="preload" as="image" href={`${basePath}images/avatar.svg`} />
+    <link rel="preload" as="image" href={`${basePath}images/avatar.jpg`} />
   </head>
   <body>
     <slot />
