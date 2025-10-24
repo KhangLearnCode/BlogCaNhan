@@ -8,7 +8,7 @@ const latest = await Astro.glob('./blog/*.md');
 latest.sort((a,b)=> new Date(b.frontmatter.pubDate||0).getTime() - new Date(a.frontmatter.pubDate||0).getTime());
 const top3 = latest.slice(0,3);
 
-// Prefix base cho ảnh
+// Prefix base cho ảnh/tài nguyên khi deploy dưới subpath
 const basePath = Astro.site ? new URL(Astro.site).pathname.replace(/\/$/, '') + '/' : '/';
 ---
 <BaseLayout title="Lê Nguyễn Duy Khang – Blog cá nhân" description="Portfolio blog của Lê Nguyễn Duy Khang: chia sẻ về Java, JavaScript và lập trình mạng máy tính.">
@@ -30,12 +30,19 @@ const basePath = Astro.site ? new URL(Astro.site).pathname.replace(/\/$/, '') + 
           <span class="badge">Web</span>
         </div>
         <div style="display:flex; gap:12px; flex-wrap:wrap">
-          <a class="btn" href="/BlogCaNhan/blog/">📝 Xem Blog</a>
+          <a class="btn" href="/blog">📝 Xem Blog</a>
           <a class="btn" style="background:linear-gradient(135deg,var(--brand),var(--primary))" href="https://github.com/KhangLearnCode" target="_blank" rel="noreferrer">⭐ GitHub</a>
         </div>
       </div>
       <div class="avatar">
-        <img src={`${basePath}images/avatar.svg`} alt="Ảnh đại diện" width="640" height="480" />
+        <img
+          src={`${basePath}images/avatar.jpg`}
+          alt="Ảnh đại diện của Lê Nguyễn Duy Khang"
+          width="768"
+          height="1152"
+          loading="lazy"
+          decoding="async"
+        />
       </div>
     </section>
 
