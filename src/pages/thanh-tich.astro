@@ -3,6 +3,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 
+const basePath = Astro.site ? new URL(Astro.site).pathname.replace(/\/$/, '') : '';
+
 const achievements = [
   {
     year: '2025',
@@ -18,37 +20,84 @@ const achievements = [
   },
   {
     year: '2024',
-    title: 'Triển khai CI/CD đơn giản với GitHub Actions',
+    title: 'CI/CD với GitHub Actions',
     desc: 'Build SSG Astro, upload artifact và deploy GitHub Pages tự động.',
     tags: ['CI/CD','GitHub Actions','Astro'],
   },
 ];
+
+// KHAI BÁO CHỨNG CHỈ: cập nhật đường dẫn Credly thật sau khi bạn có URL
+const certificates = [
+  {
+    title: 'Networking Basics',
+    issuer: 'Cisco Networking Academy',
+    issued: '2025',
+    img: 'certificates/networking-basics.jpg',  // thumbnail (ảnh xuất từ PDF)
+    pdf: 'certificates/networking-basics.pdf',  // file PDF đầy đủ
+    credly: 'https://www.credly.com/earner/<your-credly>/badge/<badge-id>', // THAY bằng link thật
+  },
+  {
+    title: 'JavaScript Essentials 1',
+    issuer: 'Cisco Networking Academy',
+    issued: '2025',
+    img: 'certificates/javascript-essentials-1.jpg',
+    pdf: 'certificates/javascript-essentials-1.pdf',
+    credly: 'https://www.credly.com/earner/<your-credly>/badge/<badge-id>',
+  },
+  {
+    title: 'JavaScript Essentials 2',
+    issuer: 'Cisco Networking Academy',
+    issued: '2025',
+    img: 'certificates/javascript-essentials-2.jpg',
+    pdf: 'certificates/javascript-essentials-2.pdf',
+    credly: 'https://www.credly.com/earner/<your-credly>/badge/<badge-id>',
+  },
+];
 ---
-<BaseLayout title="Thành tích • Lê Nguyễn Duy Khang" description="Một số dự án và thành tích học tập/cá nhân tiêu biểu.">
+<BaseLayout title="Thành tích • Lê Nguyễn Duy Khang" description="Một số dự án và chứng chỉ tiêu biểu.">
   <Nav />
   <main class="container section">
     <h1>Thành tích</h1>
-    <div class="grid">
-      {achievements.map((a) => (
-        <div class="card">
-          <div class="meta">{a.year}</div>
-          <h3>{a.title}</h3>
-          <p style="color:var(--muted)">{a.desc}</p>
-          <div class="tags">
-            {a.tags.map((t) => <span class="tag">{t}</span>)}
-          </div>
-        </div>
-      ))}
-    </div>
 
-    <section style="margin-top:22px">
-      <div class="card" style="max-width:900px">
-        <h2 style="margin:.2rem 0 8px">Chứng chỉ / Hoạt động</h2>
-        <ul>
-          <li>Tham gia các đồ án lập trình mạng (TCP/UDP Socket, WebSocket) và chia sẻ lại trên blog.</li>
-          <li>Xây dựng blog cá nhân (Astro SSG) và tự động hoá triển khai bằng GitHub Actions.</li>
-          <li>Đóng góp open-source nhỏ: tối ưu layout, fix CSS, viết bài kỹ thuật.</li>
-        </ul>
+    <section style="margin: 12px 0 26px">
+      <h2 style="margin:.2rem 0 12px">Dự án / Thành tích kỹ thuật</h2>
+      <div class="grid">
+        {achievements.map((a) => (
+          <div class="card">
+            <div class="meta">{a.year}</div>
+            <h3>{a.title}</h3>
+            <p style="color:var(--muted)">{a.desc}</p>
+            <div class="tags">
+              {a.tags.map((t) => <span class="tag">{t}</span>)}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section style="margin: 22px 0 0">
+      <h2 style="margin:.2rem 0 12px">Chứng chỉ</h2>
+      <p style="color:var(--muted); margin: 0 0 12px">
+        Ảnh dưới đây là thumbnail (xuất từ PDF). Bạn có thể bấm “Xem PDF” để mở chứng chỉ đầy đủ hoặc “Xem trên Credly”.
+      </p>
+      <div class="grid">
+        {certificates.map((c) => (
+          <div class="card" style="overflow:hidden">
+            <img
+              src={`${basePath}/${c.img}`}
+              alt={`Chứng chỉ ${c.title} – ${c.issuer}`}
+              style="width:100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius:12px; border:1px solid rgba(255,255,255,.08);"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="meta" style="margin-top:8px">{c.issuer} • {c.issued}</div>
+            <h3 style="margin:.4rem 0 .4rem">{c.title}</h3>
+            <div style="display:flex; gap:10px; flex-wrap:wrap">
+              <a class="btn" href={`${basePath}/${c.pdf}`} target="_blank" rel="noreferrer" aria-label={`Xem PDF: ${c.title}`}>📄 Xem PDF</a>
+              <a class="btn" style="background:linear-gradient(135deg,var(--brand),var(--primary))" href={c.credly} target="_blank" rel="noreferrer" aria-label={`Xem trên Credly: ${c.title}`}>🔗 Xem trên Credly</a>
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   </main>
