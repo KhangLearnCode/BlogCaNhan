@@ -24,14 +24,23 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
-      - name: Setup Node
+      # Nếu có package-lock.json → bật cache npm
+      - name: Setup Node (with npm cache)
+        if: ${{ hashFiles('**/package-lock.json') != '' }}
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
 
-      # Dùng npm ci khi có package-lock.json; nếu không có thì dùng npm install
-      - name: Install deps (npm ci or npm install)
+      # Nếu KHÔNG có lock file → setup Node bình thường
+      - name: Setup Node (no cache)
+        if: ${{ hashFiles('**/package-lock.json') == '' }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # Cài deps: ưu tiên npm ci nếu có lock, nếu không thì npm install
+      - name: Install deps
         run: |
           if [ -f package-lock.json ]; then
             npm ci
