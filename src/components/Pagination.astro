@@ -1,0 +1,17 @@
+---
+interface Props {
+  page: number;
+  pageCount: number;
+  baseHref: string; // ví dụ: '/blog/page'
+}
+const { page, pageCount, baseHref } = Astro.props as Props;
+const prev = page > 1 ? `${baseHref}/${page-1}` : null;
+const next = page < pageCount ? `${baseHref}/${page+1}` : null;
+
+const basePath = Astro.site ? new URL(Astro.site).pathname.replace(/\/$/, '') : '';
+---
+<nav aria-label="Phân trang" style="display:flex; gap:10px; margin-top:16px">
+  {prev && <a class="btn" href={`${basePath}${prev}`}>← Trang trước</a>}
+  <span class="badge">Trang {page}/{pageCount}</span>
+  {next && <a class="btn" href={`${basePath}${next}`}>Trang sau →</a>}
+</nav>
