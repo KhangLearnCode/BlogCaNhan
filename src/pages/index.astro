@@ -3,9 +3,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import PostCard from '../components/PostCard.astro';
+
 const latest = await Astro.glob('./blog/*.md');
 latest.sort((a,b)=> new Date(b.frontmatter.pubDate||0).getTime() - new Date(a.frontmatter.pubDate||0).getTime());
 const top3 = latest.slice(0,3);
+
+// Prefix base cho ảnh
+const basePath = Astro.site ? new URL(Astro.site).pathname.replace(/\/$/, '') + '/' : '/';
 ---
 <BaseLayout title="Lê Nguyễn Duy Khang – Blog cá nhân" description="Portfolio blog của Lê Nguyễn Duy Khang: chia sẻ về Java, JavaScript và lập trình mạng máy tính.">
   <Nav />
@@ -31,7 +35,7 @@ const top3 = latest.slice(0,3);
         </div>
       </div>
       <div class="avatar">
-        <img src="/images/avatar.svg" alt="Ảnh đại diện" width="640" height="480" />
+        <img src={`${basePath}images/avatar.svg`} alt="Ảnh đại diện" width="640" height="480" />
       </div>
     </section>
 
