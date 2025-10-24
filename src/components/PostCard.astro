@@ -1,0 +1,19 @@
+---
+export interface Props{
+  url: string;
+  title: string;
+  description?: string;
+  pubDate?: string | Date;
+  tags?: string[];
+}
+const { url, title, description, pubDate, tags = [] } = Astro.props as Props;
+const d = pubDate ? new Date(pubDate) : undefined;
+---
+<a class="card" href={url}>
+  <div class="meta">{d ? d.toLocaleDateString('vi-VN') : ''}</div>
+  <h3>{title}</h3>
+  {description && <p style="color:var(--muted); margin:.2rem 0 .4rem">{description}</p>}
+  {tags.length > 0 && <div class="tags">
+    {tags.map((t) => <span class="tag">{t}</span>)}
+  </div>}
+</a>

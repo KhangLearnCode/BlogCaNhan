@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import PostCard from '../components/PostCard.astro';
+const latest = await Astro.glob('./blog/*.md');
+latest.sort((a,b)=> new Date(b.frontmatter.pubDate||0).getTime() - new Date(a.frontmatter.pubDate||0).getTime());
+const top3 = latest.slice(0,3);
+---
+<BaseLayout title="Lê Nguyễn Duy Khang – Blog cá nhân" description="Portfolio blog của Lê Nguyễn Duy Khang: chia sẻ về Java, JavaScript và lập trình mạng máy tính.">
+  <Nav />
+  <main class="container">
+    <section class="hero">
+      <div>
+        <h1>Xin chào, mình là <span style="color:var(--primary)">Lê Nguyễn Duy Khang</span> 👋</h1>
+        <p>
+          Sinh viên năm 4 – Chuyên ngành Công nghệ Phần mềm, HUTECH.
+          Mình xây dựng blog này để tổng hợp và chia sẻ kiến thức về Java, JavaScript
+          và đặc biệt là lập trình mạng máy tính.
+        </p>
+        <div class="badges">
+          <span class="badge">Java</span>
+          <span class="badge">JavaScript</span>
+          <span class="badge">Networking</span>
+          <span class="badge">OOP</span>
+          <span class="badge">Web</span>
+        </div>
+        <div style="display:flex; gap:12px; flex-wrap:wrap">
+          <a class="btn" href="/blog">📝 Xem Blog</a>
+          <a class="btn" style="background:linear-gradient(135deg,var(--brand),var(--primary))" href="https://github.com/KhangLearnCode" target="_blank" rel="noreferrer">⭐ GitHub</a>
+        </div>
+      </div>
+      <div class="avatar">
+        <img src="/images/avatar.svg" alt="Ảnh đại diện" width="640" height="480" />
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 style="margin:0 0 16px">Bài viết mới</h2>
+      <div class="grid">
+        {top3.map((p) => (
+          <PostCard url={p.url} title={p.frontmatter.title} description={p.frontmatter.description} pubDate={p.frontmatter.pubDate} tags={p.frontmatter.tags} />
+        ))}
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

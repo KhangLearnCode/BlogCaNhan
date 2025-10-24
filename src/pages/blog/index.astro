@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import PostCard from '../../components/PostCard.astro';
+
+const posts = await Astro.glob('./*.md');
+posts.sort((a,b)=> new Date(b.frontmatter.pubDate||0).getTime() - new Date(a.frontmatter.pubDate||0).getTime());
+---
+<BaseLayout title="Blog • Lê Nguyễn Duy Khang" description="Danh sách bài viết về lập trình Java, JavaScript và lập trình mạng.">
+  <Nav />
+  <main class="container section">
+    <h1 style="margin:0 0 12px">Blog</h1>
+    <p style="color:var(--muted); margin:0 0 16px">Chia sẻ kiến thức Java, JavaScript, mạng máy tính, OOP, DOM, Fetch API, Socket, REST API...</p>
+
+    <div class="grid">
+      {posts.map((p) => (
+        <PostCard
+          url={p.url}
+          title={p.frontmatter.title}
+          description={p.frontmatter.description}
+          pubDate={p.frontmatter.pubDate}
+          tags={p.frontmatter.tags}
+        />
+      ))}
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

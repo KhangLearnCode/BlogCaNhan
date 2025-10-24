@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+<BaseLayout title="About • Lê Nguyễn Duy Khang" description="Giới thiệu về Lê Nguyễn Duy Khang – sinh viên năm 4 HUTECH, yêu thích Java, JavaScript và lập trình mạng.">
+  <Nav />
+  <main class="container section">
+    <h1>About</h1>
+    <div class="card" style="max-width:800px">
+      <p>
+        Mình là <strong>Lê Nguyễn Duy Khang</strong>, sinh viên năm 4 – Chuyên ngành Công nghệ Phần mềm tại
+        <strong> Đại học Công nghệ TP. Hồ Chí Minh (HUTECH)</strong>. Mình quan tâm đến
+        phát triển ứng dụng backend bằng <strong>Java</strong>, ứng dụng web với <strong>JavaScript</strong>,
+        và các chủ đề liên quan đến <strong>lập trình mạng</strong> (TCP/UDP, Socket, REST API, WebSocket).
+      </p>
+      <p>
+        Blog này là nơi mình ghi chép kiến thức, chia sẻ kinh nghiệm học tập và các demo nhỏ.
+        Rất mong nhận được góp ý từ mọi người!
+      </p>
+      <p>
+        Liên hệ:
+        <a href="https://www.facebook.com/duy.khang.423251" target="_blank" rel="noreferrer">Facebook</a> ·
+        <a href="https://github.com/KhangLearnCode" target="_blank" rel="noreferrer">GitHub</a> ·
+        <a href="mailto:lekhang1617@gmail.com">Email</a>
+      </p>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

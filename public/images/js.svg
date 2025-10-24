@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <rect width="256" height="256" rx="28" fill="#0b1220"/>
+  <rect x="32" y="32" width="192" height="192" rx="18" fill="#111827" stroke="#22d3ee"/>
+  <text x="128" y="144" text-anchor="middle" fill="#22d3ee" font-family="Segoe UI, Roboto" font-size="88" font-weight="800">JS</text>
+</svg>

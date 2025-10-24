@@ -1,0 +1,20 @@
+---
+const nav = [
+  { href: '/', label: 'Home' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
+  { href: '/projects', label: 'Projects' },
+];
+---
+<header class="site">
+  <div class="container nav">
+    <a class="logo" href="/">
+      <img src="/images/js.svg" alt="logo" width="22" height="22" />
+      <span><b>Lê Nguyễn Duy Khang</b> – Blog cá nhân</span>
+    </a>
+    <nav class="menu">
+      {nav.map((i) => <a href={i.href}>{i.label}</a>)}
+    </nav>
+  </div>
+</header>

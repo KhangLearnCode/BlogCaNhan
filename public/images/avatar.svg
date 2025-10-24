@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#22d3ee" stop-opacity=".9"/>
+      <stop offset="1" stop-color="#a78bfa" stop-opacity=".9"/>
+    </linearGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="#0b1220"/>
+  <circle cx="400" cy="240" r="120" fill="url(#g)" opacity=".25"/>
+  <circle cx="400" cy="260" r="100" fill="url(#g)" opacity=".55"/>
+  <rect x="250" y="360" width="300" height="160" rx="18" fill="#0f172a" stroke="#22d3ee" opacity=".6"/>
+  <text x="400" y="430" fill="#e5e7eb" font-size="26" text-anchor="middle" font-family="Segoe UI, Roboto">Lê Nguyễn Duy Khang</text>
+  <text x="400" y="464" fill="#a1a1aa" font-size="18" text-anchor="middle" font-family="Segoe UI, Roboto">Sinh viên CNTT • HUTECH</text>
+</svg>
