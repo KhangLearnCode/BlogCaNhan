@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import PostCard from '../../components/PostCard.astro';
+import { slugify } from '../../lib/slug';
+
+const all = await Astro.glob('../blog/*.md');
+const current = Astro.params.tag!;
+const posts = all
+  .filter(p => (p.frontmatter.tags || []).some((t: string) => slugify(t) === current))
+  .sort((a,b)=> new Date(b.frontmatter.pubDate||0).getTime() - new Date(a.frontmatter.pubDate||0).getTime());
+
+const humanTag = posts.length ? (posts[0].frontmatter.tags.find((t:string)=> slugify(t)===current) ?? current) : current;
+---
+<BaseLayout title={`Tag: ${humanTag} • Lê Nguyễn Duy Khang`} description={`Các bài viết có tag: ${humanTag}`}>
+  <Nav />
+  <main class="container section">
+    <h1 style="margin:0 0 12px">Tag: {humanTag}</h1>
+    <div class="grid">
+      {posts.map((p) => (
+        <PostCard
+          url={p.url}
+          title={p.frontmatter.title}
+          description={p.frontmatter.description}
+          pubDate={p.frontmatter.pubDate}
+          tags={p.frontmatter.tags}
+        />
+      ))}
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
