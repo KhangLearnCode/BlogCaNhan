@@ -2,29 +2,58 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+
+const basePath = Astro.site ? new URL(Astro.site).pathname.replace(/\/$/, '') : '';
 ---
-<BaseLayout title="About • Lê Nguyễn Duy Khang" description="Giới thiệu về Lê Nguyễn Duy Khang – sinh viên năm 4 HUTECH, yêu thích Java, JavaScript và lập trình mạng.">
+<BaseLayout
+  title="About • Lê Nguyễn Duy Khang"
+  description="Giới thiệu chuyên nghiệp về Lê Nguyễn Duy Khang – sinh viên năm 4 HUTECH, định hướng Backend Java, JavaScript và lập trình mạng."
+>
   <Nav />
   <main class="container section">
     <h1>About</h1>
-    <div class="card" style="max-width:800px">
-      <p>
-        Mình là <strong>Lê Nguyễn Duy Khang</strong>, sinh viên năm 4 – Chuyên ngành Công nghệ Phần mềm tại
-        <strong> Đại học Công nghệ TP. Hồ Chí Minh (HUTECH)</strong>. Mình quan tâm đến
-        phát triển ứng dụng backend bằng <strong>Java</strong>, ứng dụng web với <strong>JavaScript</strong>,
-        và các chủ đề liên quan đến <strong>lập trình mạng</strong> (TCP/UDP, Socket, REST API, WebSocket).
+
+    <section class="card" style="max-width:900px">
+      <h2 style="margin:.2rem 0 8px">Tóm tắt</h2>
+      <p style="color:var(--muted)">
+        Mình là <strong>Lê Nguyễn Duy Khang</strong>, sinh viên năm 4 Chuyên ngành Công nghệ Phần mềm tại
+        <strong>HUTECH</strong>. Mình tập trung vào <strong>Backend với Java</strong>, lập trình mạng
+        (TCP/UDP, Socket, WebSocket) và phát triển web với <strong>JavaScript</strong>.
+        Blog này ghi lại kiến thức học tập, các demo kỹ thuật và kinh nghiệm thực tế.
       </p>
-      <p>
-        Blog này là nơi mình ghi chép kiến thức, chia sẻ kinh nghiệm học tập và các demo nhỏ.
-        Rất mong nhận được góp ý từ mọi người!
+
+      <h2 style="margin:16px 0 8px">Kỹ năng chính</h2>
+      <ul>
+        <li><strong>Java, OOP</strong>: Collection, Concurrency cơ bản, I/O, NIO.</li>
+        <li><strong>Lập trình mạng</strong>: TCP/UDP Socket, thiết kế giao thức ứng dụng, mô hình server đa luồng.</li>
+        <li><strong>Web/REST</strong>: Spring Boot (REST API, Validation, Security cơ bản), JSON, HTTP.</li>
+        <li><strong>Frontend</strong>: JavaScript/DOM, Fetch API, WebSocket; SSG với <strong>Astro</strong>.</li>
+        <li><strong>DevOps cơ bản</strong>: Git/GitHub, GitHub Actions, deploy GitHub Pages.</li>
+      </ul>
+
+      <h2 style="margin:16px 0 8px">Định hướng</h2>
+      <p style="color:var(--muted)">
+        Trở thành <strong>Backend Engineer</strong> vững Java và hệ thống mạng, có khả năng thiết kế API dễ dùng,
+        bảo mật, quan sát được, và mở rộng tốt. Song song, tiếp tục chia sẻ kiến thức qua blog để đóng góp cho cộng đồng.
       </p>
+
+      <h2 style="margin:16px 0 8px">Học vấn</h2>
+      <ul>
+        <li><strong>Đại học Công nghệ TP. Hồ Chí Minh (HUTECH)</strong> — Chuyên ngành Công nghệ Phần mềm.</li>
+      </ul>
+
+      <h2 style="margin:16px 0 8px">Liên hệ</h2>
       <p>
-        Liên hệ:
         <a href="https://www.facebook.com/duy.khang.423251" target="_blank" rel="noreferrer">Facebook</a> ·
         <a href="https://github.com/KhangLearnCode" target="_blank" rel="noreferrer">GitHub</a> ·
         <a href="mailto:lekhang1617@gmail.com">Email</a>
       </p>
-    </div>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:10px">
+        <a class="btn" href={`${basePath}/blog`}>📝 Xem Blog</a>
+        <a class="btn" style="background:linear-gradient(135deg,var(--brand),var(--primary))" href={`${basePath}/thanh-tich`}>🏆 Xem Thành tích</a>
+      </div>
+    </section>
   </main>
   <Footer />
 </BaseLayout>
