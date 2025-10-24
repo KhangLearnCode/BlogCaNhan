@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+import PostCard from '../../../components/PostCard.astro';
+import Pagination from '../../../components/Pagination.astro';
+
+const PAGE_SIZE = 9;
+const all = await Astro.glob('../*.md');
+all.sort((a,b)=> new Date(b.frontmatter.pubDate||0).getTime() - new Date(a.frontmatter.pubDate||0).getTime());
+
+const page = Number(Astro.params.page || 1);
+const pageCount = Math.max(1, Math.ceil(all.length / PAGE_SIZE));
+const start = (page - 1) * PAGE_SIZE;
+const posts = all.slice(start, start + PAGE_SIZE);
+
+if (page < 1 || page > pageCount) {
+  throw Astro.redirect('/blog');
+}
+---
+<BaseLayout title={`Blog – Trang ${page}`} description="Phân trang danh sách bài viết.">
+  <Nav />
+  <main class="container section">
+    <h1 style="margin:0 0 12px">Blog – Trang {page}</h1>
+    <div class="grid">
+      {posts.map((p) => (
+        <PostCard
+          url={p.url}
+          title={p.frontmatter.title}
+          description={p.frontmatter.description}
+          pubDate={p.frontmatter.pubDate}
+          tags={p.frontmatter.tags}
+        />
+      ))}
+    </div>
+    <Pagination page={page} pageCount={pageCount} baseHref="/blog/page" />
+  </main>
+  <Footer />
+</BaseLayout>
