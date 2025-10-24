@@ -26,7 +26,7 @@ const achievements = [
   },
 ];
 
-// KHAI BÁO CHỨNG CHỈ: cập nhật đường dẫn Credly thật sau khi bạn có URL
+// KHAI BÁO CHỨNG CHỈ: 
 const certificates = [
   {
     title: 'Networking Basics',
@@ -34,7 +34,7 @@ const certificates = [
     issued: '2025',
     img: 'certificates/networking-basics.jpg',  // thumbnail (ảnh xuất từ PDF)
     pdf: 'certificates/networking-basics.pdf',  // file PDF đầy đủ
-    credly: 'https://www.credly.com/earner/earned/share/e78f6962-f91c-43c3-b386-ecbc69f7df65', 
+    
   },
   {
     title: 'JavaScript Essentials 1',
@@ -42,7 +42,7 @@ const certificates = [
     issued: '2025',
     img: 'certificates/javascript-essentials-1.jpg',
     pdf: 'certificates/javascript-essentials-1.pdf',
-    credly: 'https://www.credly.com/earner/earned/share/696f8e36-048b-46a1-8c07-8423637397f4',
+    
   },
   {
     title: 'JavaScript Essentials 2',
@@ -50,7 +50,7 @@ const certificates = [
     issued: '2025',
     img: 'certificates/javascript-essentials-2.jpg',
     pdf: 'certificates/javascript-essentials-2.pdf',
-    credly: 'https://www.credly.com/earner/earned/share/495bd213-fda4-4598-ae2f-2577b91dfce3?provider=download',
+    
   },
 ];
 ---
@@ -78,7 +78,7 @@ const certificates = [
     <section style="margin: 22px 0 0">
       <h2 style="margin:.2rem 0 12px">Chứng chỉ</h2>
       <p style="color:var(--muted); margin: 0 0 12px">
-        Ảnh dưới đây là thumbnail (xuất từ PDF). Bạn có thể bấm “Xem PDF” để mở chứng chỉ đầy đủ hoặc “Xem trên Credly”.
+        Ảnh dưới đây là thumbnail. Bạn có thể bấm “Xem PDF” để mở chứng chỉ đầy đủ.
       </p>
       <div class="grid">
         {certificates.map((c) => (
@@ -94,7 +94,6 @@ const certificates = [
             <h3 style="margin:.4rem 0 .4rem">{c.title}</h3>
             <div style="display:flex; gap:10px; flex-wrap:wrap">
               <a class="btn" href={`${basePath}/${c.pdf}`} target="_blank" rel="noreferrer" aria-label={`Xem PDF: ${c.title}`}>📄 Xem PDF</a>
-              <a class="btn" style="background:linear-gradient(135deg,var(--brand),var(--primary))" href={c.credly} target="_blank" rel="noreferrer" aria-label={`Xem trên Credly: ${c.title}`}>🔗 Xem trên Credly</a>
             </div>
           </div>
         ))}
