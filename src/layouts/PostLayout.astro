@@ -5,12 +5,20 @@ interface Frontmatter {
   pubDate?: string | Date;
   tags?: string[];
 }
+
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
 const fm = Astro.props as Frontmatter;
 const d = fm.pubDate ? new Date(fm.pubDate) : undefined;
 const title = `${fm.title} • Lê Nguyễn Duy Khang`;
 const desc = fm.description ?? 'Bài viết blog về Java/JavaScript và lập trình mạng.';
 const tags = fm.tags ?? [];
+
+const basePath = Astro.site ? new URL(Astro.site).pathname.replace(/\/$/, '') + '/' : '/';
 ---
+<!DOCTYPE html>
 <html lang="vi">
   <head>
     <meta charset="utf-8" />
@@ -21,12 +29,11 @@ const tags = fm.tags ?? [];
     <meta property="og:type" content="article" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={desc} />
-    <meta property="og:image" content="/images/java.svg" />
-    <link rel="stylesheet" href="/src/styles/global.css" />
-    <link rel="icon" href="/images/js.svg" />
+    <meta property="og:image" content={`${basePath}images/java.svg`} />
+    <link rel="icon" href={`${basePath}images/js.svg`} />
   </head>
   <body>
-    <import src="../components/Nav.astro" />
+    <Nav />
     <div class="container section post">
       <header>
         <h1>{fm.title}</h1>
@@ -47,6 +54,6 @@ const tags = fm.tags ?? [];
         </div>
       </section>
     </div>
-    <import src="../components/Footer.astro" />
+    <Footer />
   </body>
 </html>
