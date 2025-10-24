@@ -12,11 +12,13 @@ const { url, title, description, pubDate, tags = [] } = Astro.props as Props;
 const d = pubDate ? new Date(pubDate) : undefined;
 const basePath = Astro.site ? new URL(Astro.site).pathname.replace(/\/$/, '') : '';
 ---
-<a class="card" href={url}>
+<article class="card">
   <div class="meta">{d ? d.toLocaleDateString('vi-VN') : ''}</div>
-  <h3>{title}</h3>
+  <h3>
+    <a class="title-link" href={url} aria-label={`Xem bài: ${title}`}>{title}</a>
+  </h3>
   {description && <p style="color:var(--muted); margin:.2rem 0 .4rem">{description}</p>}
   {tags.length > 0 && <div class="tags">
     {tags.map((t) => <a class="tag" href={`${basePath}/tags/${slugify(t)}`}>{t}</a>)}
   </div>}
-</a>
+</article>
