@@ -10,7 +10,9 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "astro": "^4.15.0"
+    "astro": "^4.15.0",
+    "@astrojs/rss": "^4.0.0",
+    "@astrojs/sitemap": "^3.0.0"
   },
   "devDependencies": {
     "prettier": "^3.3.3"
