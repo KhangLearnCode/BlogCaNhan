@@ -1,4 +1,4 @@
-# Blog cá nhân – Lê Nguyễn Duy Khang (Astro SSG)
+# Blog cá nhân – Lê Nguyễn Duy Khang 
 
 Blog hiện đại, responsive, tối ưu SEO cơ bản, viết bằng Astro. Chủ đề: Java, JavaScript, lập trình mạng.
 
@@ -10,24 +10,9 @@ Blog hiện đại, responsive, tối ưu SEO cơ bản, viết bằng Astro. Ch
   - Home (giới thiệu, liên kết mạng xã hội)
   - Blog (grid 3 cột, liệt kê bài viết)
   - About, Contact, Projects (tuỳ chọn)
-- 9 bài viết tiếng Việt (Java/JS/Networking)
+- 9+ bài viết tiếng Việt (Java/JS/Networking)
 - Workflow GitHub Actions tự động deploy GitHub Pages
 
-## Chạy local
-Yêu cầu: Node.js >= 18
-
-```bash
-npm ci
-npm run dev
-```
-
-Mở http://localhost:4321
-
-## Build
-```bash
-npm run build
-npm run preview
-```
 
 ## Deploy lên GitHub Pages
 
@@ -60,10 +45,9 @@ git push -u origin main
 - SEO mặc định: `src/layouts/BaseLayout.astro` + `src/layouts/PostLayout.astro`
 - Bài viết: thêm file `.md` vào `src/pages/blog/` (giữ frontmatter tương tự)
 
-## Bật bình luận (Giscus) – tùy chọn
-- Tạo repo discussions, cấu hình Giscus: https://giscus.app/
-- Thêm script Giscus vào `src/layouts/PostLayout.astro` ở phần Bình luận.
+
 
 ## Tham khảo
 - Astro Docs: https://docs.astro.build/
+
 - GitHub Pages: https://pages.github.com/
