@@ -3,7 +3,6 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Nav from '../../../components/Nav.astro';
 import Footer from '../../../components/Footer.astro';
 import PostCard from '../../../components/PostCard.astro';
-import Pagination from '../../../components/Pagination.astro';
 
 const PAGE_SIZE = 9;
 const all = await Astro.glob('../*.md');
@@ -33,7 +32,7 @@ if (page < 1 || page > pageCount) {
         />
       ))}
     </div>
-    <Pagination page={page} pageCount={pageCount} baseHref="/blog/page" />
+    <!-- Bạn có thể thêm component Pagination ở đây nếu đã tạo -->
   </main>
   <Footer />
 </BaseLayout>
