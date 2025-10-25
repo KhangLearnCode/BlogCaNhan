@@ -5,7 +5,6 @@ interface Frontmatter {
   pubDate?: string | Date;
   tags?: string[];
 }
-
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
@@ -15,7 +14,6 @@ const d = fm.pubDate ? new Date(fm.pubDate) : undefined;
 const title = `${fm.title} • Lê Nguyễn Duy Khang`;
 const desc = fm.description ?? 'Bài viết blog về Java/JavaScript và lập trình mạng.';
 const tags = fm.tags ?? [];
-
 const basePath = Astro.site ? new URL(Astro.site).pathname.replace(/\/$/, '') + '/' : '/';
 ---
 <!DOCTYPE html>
@@ -29,18 +27,35 @@ const basePath = Astro.site ? new URL(Astro.site).pathname.replace(/\/$/, '') + 
     <meta property="og:type" content="article" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={desc} />
-    <meta property="og:image" content={`${basePath}images/java.svg`} />
+    <meta property="og:image" content={`${basePath}images/avatar.jpg`} />
     <link rel="icon" href={`${basePath}images/js.svg`} />
+    <script type="application/ld+json">
+      {JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: fm.title,
+        datePublished: d?.toISOString(),
+        author: { '@type': 'Person', name: 'Lê Nguyễn Duy Khang' },
+        description: desc,
+        image: `${basePath}images/avatar.jpg`,
+        mainEntityOfPage: { '@type': 'WebPage', '@id': Astro.url?.pathname }
+      })}
+    </script>
   </head>
   <body>
     <Nav />
     <div class="container section post">
+      <nav class="breadcrumb">
+        <a href={`${basePath}blog`}>Blog</a>
+        <span aria-hidden="true">·</span>
+        <span>{d ? d.toLocaleDateString('vi-VN') : '—'}</span>
+      </nav>
+
       <header>
-        <h1>{fm.title}</h1>
-        <div class="meta">
-          {d ? d.toLocaleDateString('vi-VN') : ''} · {tags.length ? tags.join(' • ') : 'Blog'}
-        </div>
+        <h1 class="post-title">{fm.title}</h1>
+        <div class="meta">{tags.length ? tags.join(' • ') : 'Bài viết'}</div>
       </header>
+
       <article class="content">
         <slot />
       </article>
