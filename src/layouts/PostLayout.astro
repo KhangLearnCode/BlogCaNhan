@@ -1,6 +1,6 @@
 ---
 interface Frontmatter {
-  title: string;
+  title?: string;
   description?: string;
   pubDate?: string | Date;
   tags?: string[];
@@ -13,13 +13,27 @@ import { slugify } from '../lib/slug';
 
 const fm = Astro.props as Frontmatter;
 const d = fm.pubDate ? new Date(fm.pubDate) : undefined;
-const title = `${fm.title} • Lê Nguyễn Duy Khang`;
 const desc = fm.description ?? 'Bài viết blog về Java/JavaScript và lập trình mạng.';
 const tags = fm.tags ?? [];
 
+// Prefix base cho GitHub Pages
 const basePath = Astro.site ? new URL(Astro.site).pathname.replace(/\/$/, '') + '/' : '/';
 
-// Định dạng ngày giờ theo vi-VN. Nếu giờ/phút đều 0 thì chỉ hiển thị ngày.
+// Fallback tiêu đề từ slug nếu thiếu frontmatter.title
+function toTitleFromSlug(slug: string) {
+  const s = decodeURIComponent(slug.replace(/-/g, ' ').trim());
+  if (!s) return 'Bài viết';
+  return s.replace(/\b\w/g, (m) => m.toUpperCase());
+}
+const path = Astro.url?.pathname?.replace(/\/$/, '') ?? '';
+const lastSeg = path.split('/').pop() ?? '';
+const autoTitle = toTitleFromSlug(lastSeg);
+const displayTitle = fm.title && String(fm.title).trim().length > 0 ? fm.title : autoTitle;
+
+// Tiêu đề trang (title tag + OG)
+const pageTitle = `${displayTitle} • Lê Nguyễn Duy Khang`;
+
+// Định dạng ngày giờ vi-VN (chỉ hiển thị giờ nếu có)
 let metaDate = '';
 if (d) {
   const dateStr = d.toLocaleDateString('vi-VN');
@@ -38,11 +52,11 @@ if (d) {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>{title}</title>
+    <title>{pageTitle}</title>
     <meta name="description" content={desc} />
     <meta name="keywords" content={(tags.join(', ') + ', lập trình Java, JavaScript')} />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content={title} />
+    <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={desc} />
     <meta property="og:image" content={`${basePath}images/avatar.jpg`} />
     <link rel="icon" href={`${basePath}images/js.svg`} />
@@ -51,7 +65,7 @@ if (d) {
     <Nav />
     <div class="container section post">
       <header class="post-hero card">
-        <h1 class="post-title">{fm.title}</h1>
+        <h1 class="post-title">{displayTitle}</h1>
 
         {metaDate && (
           <div class="post-meta">
