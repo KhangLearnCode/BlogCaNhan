@@ -3,22 +3,37 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import PostCard from '../../components/PostCard.astro';
-import Pagination from '../../components/Pagination.astro';
 
-const PAGE_SIZE = 9;
-const all = await Astro.glob('./*.md');
-all.sort((a,b)=> new Date(b.frontmatter.pubDate||0).getTime() - new Date(a.frontmatter.pubDate||0).getTime());
+const basePath = Astro.site ? new URL(Astro.site).pathname.replace(/\/$/, '') : '';
 
-const page = 1;
-const pageCount = Math.max(1, Math.ceil(all.length / PAGE_SIZE));
-const posts = all.slice(0, PAGE_SIZE);
+const posts = await Astro.glob('./*.md');
+posts.sort((a,b)=> new Date(b.frontmatter.pubDate||0).getTime() - new Date(a.frontmatter.pubDate||0).getTime());
+
+// Chuẩn bị tag cloud
+const tagSet = new Set<string>();
+for (const p of posts) (p.frontmatter.tags || []).forEach((t: string) => tagSet.add(t));
+const tags = Array.from(tagSet).sort((a,b)=> a.localeCompare(b, 'vi'));
 ---
-<BaseLayout title="Blog • Lê Nguyễn Duy Khang" description="Danh sách bài viết về lập trình Java, JavaScript và lập trình mạng.">
+<BaseLayout title="Blog • Lê Nguyễn Duy Khang" description="Blog chia sẻ kiến thức Java, JavaScript, lập trình mạng máy tính: OOP, DOM, Fetch API, Socket, REST API...">
   <Nav />
   <main class="container section">
-    <h1 style="margin:0 0 12px">Blog</h1>
-    <p style="color:var(--muted); margin:0 0 16px">Chia sẻ kiến thức Java, JavaScript, mạng máy tính, OOP, DOM, Fetch API, Socket, REST API...</p>
-    <div class="grid">
+
+    <section class="page-hero card" style="padding:18px">
+      <h1 class="page-title">Blog</h1>
+      <p class="page-subtitle">Nhật ký học tập và chia sẻ thực hành: Java • JavaScript • Lập trình mạng</p>
+
+      {tags.length > 0 && (
+        <div class="tag-cloud">
+          {tags.map((t) => (
+            <a class="tag-chip" href={`${basePath}/tags/${t.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9\s-]/g,'').trim().replace(/\s+/g,'-').replace(/-+/g,'-')}`}>
+              {t}
+            </a>
+          ))}
+        </div>
+      )}
+    </section>
+
+    <div class="grid" style="margin-top:16px">
       {posts.map((p) => (
         <PostCard
           url={p.url}
@@ -29,7 +44,6 @@ const posts = all.slice(0, PAGE_SIZE);
         />
       ))}
     </div>
-    <Pagination page={page} pageCount={pageCount} baseHref="/blog/page" />
   </main>
   <Footer />
 </BaseLayout>
