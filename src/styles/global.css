@@ -134,16 +134,13 @@ header.site{
   border-color: rgba(34,211,238,.35);
   box-shadow: 0 15px 30px rgba(0,0,0,.35);
 }
-
 .card h3{ margin:.2rem 0 .4rem }
-.card .title-link{
-  color: var(--primary);
-  text-decoration: none;
-}
-.card .title-link:hover{
-  color: var(--accent);
-}
 .card .meta{ color: var(--muted); font-size:.9rem; margin-bottom:.5rem }
+
+/* Link tiêu đề trong card (không lặp rule) */
+.card .title-link{ color: var(--primary); text-decoration: none; }
+.card .title-link:hover{ color: var(--accent); }
+
 .tags{ display:flex; gap:8px; flex-wrap:wrap; margin-top:.4rem }
 .tag{
   color:#cffafe; background: rgba(34,211,238,.1);
@@ -209,21 +206,15 @@ footer.site{
 }
 .tag-chip:hover{ color:#e9d5ff; border-color: rgba(167,139,250,.45) }
 
-/* Giữ style link tiêu đề bài viết trong card */
-.card .title-link{
-  color: var(--primary);
-  text-decoration: none;
-}
-.card .title-link:hover{
-  color: var(--accent);
-}
-
 /* Post header (chi tiết bài viết) */
 .post-hero{
+  position: relative;                 /* để đặt ngày đăng absolute */
   padding: 22px;
+  padding-bottom: 64px;               /* chừa chỗ cho ngày đăng */
   background:
     radial-gradient(800px 400px at 80% -20%, rgba(167,139,250,.12), transparent 60%),
     var(--card);
+  border-radius:16px;
 }
 .post-title{
   margin: 0 0 6px 0;
@@ -253,11 +244,19 @@ footer.site{
 }
 .chip:hover{ color:#a5f3fc; border-color: rgba(34,211,238,.45); }
 
-/* Giữ style tiêu đề link trong card (snippet yêu cầu hiển thị) */
-.card .title-link{
-  color: var(--primary);
-  text-decoration: none;
+/* Ngày đăng ở góc trái dưới của khối tiêu đề bài */
+.post-date{
+  position: absolute;
+  left: 18px;
+  bottom: 14px;
+  display:inline-flex; align-items:center; gap:8px;
+  color: var(--muted);
+  background: rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  padding:6px 10px;
+  border-radius:10px;
+  backdrop-filter: blur(2px);
 }
-.card .title-link:hover{
-  color: var(--accent);
+@media (max-width: 640px){
+  .post-hero{ padding-bottom: 72px; } /* thêm khoảng trống cho mobile */
 }
