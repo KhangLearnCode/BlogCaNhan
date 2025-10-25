@@ -217,3 +217,47 @@ footer.site{
 .card .title-link:hover{
   color: var(--accent);
 }
+
+/* Post header (chi tiết bài viết) */
+.post-hero{
+  padding: 22px;
+  background:
+    radial-gradient(800px 400px at 80% -20%, rgba(167,139,250,.12), transparent 60%),
+    var(--card);
+}
+.post-title{
+  margin: 0 0 6px 0;
+  font-size: clamp(1.6rem, 1.1rem + 2.2vw, 2.4rem);
+  line-height: 1.15;
+}
+.post-meta{
+  display:flex; gap:14px; align-items:center;
+  color: var(--muted);
+  margin: 6px 0 8px;
+}
+.meta-item{
+  display:inline-flex; align-items:center; gap:8px;
+  background: rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  padding:6px 10px; border-radius:10px;
+}
+
+/* Chips (tags) */
+.chips{ display:flex; gap:10px; flex-wrap:wrap; margin-top:6px }
+.chip{
+  display:inline-block; line-height:1.2;
+  color:#cffafe; background: rgba(34,211,238,.08);
+  border:1px solid rgba(34,211,238,.25);
+  padding:6px 12px; border-radius:999px; font-size:.85rem;
+  text-decoration:none;
+}
+.chip:hover{ color:#a5f3fc; border-color: rgba(34,211,238,.45); }
+
+/* Giữ style tiêu đề link trong card (snippet yêu cầu hiển thị) */
+.card .title-link{
+  color: var(--primary);
+  text-decoration: none;
+}
+.card .title-link:hover{
+  color: var(--accent);
+}
