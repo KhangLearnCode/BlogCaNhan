@@ -177,3 +177,43 @@ footer.site{
   border:1px solid rgba(255,255,255,.08);
 }
 
+/* Page hero cho trang Blog */
+.page-hero{ background: var(--card); border:1px solid rgba(255,255,255,.06); border-radius:16px; }
+.page-title{
+  font-size: clamp(2rem, 1.4rem + 2vw, 2.6rem);
+  margin: .2rem 0 .2rem;
+}
+.page-subtitle{ color: var(--muted); margin: 0 0 .6rem; }
+
+/* Breadcrumb + tiêu đề bài viết */
+.breadcrumb{
+  color: var(--muted);
+  display:flex; gap:8px; align-items:center;
+  margin-bottom: 6px;
+}
+.breadcrumb a{ color: var(--primary); }
+.post-title{
+  font-size: clamp(1.6rem, 1.1rem + 1.6vw, 2.2rem);
+  margin: .2rem 0 .4rem;
+}
+
+/* Tag cloud trên trang Blog */
+.tag-cloud{
+  display:flex; gap:10px; flex-wrap:wrap; margin-top: 8px;
+}
+.tag-chip{
+  color:#cffafe; background: rgba(34,211,238,.1);
+  border:1px solid rgba(34,211,238,.25);
+  padding:6px 12px; border-radius:999px; font-size:.85rem;
+  text-decoration:none;
+}
+.tag-chip:hover{ color:#e9d5ff; border-color: rgba(167,139,250,.45) }
+
+/* Giữ style link tiêu đề bài viết trong card */
+.card .title-link{
+  color: var(--primary);
+  text-decoration: none;
+}
+.card .title-link:hover{
+  color: var(--accent);
+}
