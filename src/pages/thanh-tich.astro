@@ -5,7 +5,6 @@ import Footer from '../components/Footer.astro';
 
 const basePath = Astro.site ? new URL(Astro.site).pathname.replace(/\/$/, '') : '';
 
-// KHU VỰC CHỨNG CHỈ (giữ như cũ, cập nhật link/đường dẫn của bạn)
 const certificates = [
   {
     title: 'Networking Basics',
@@ -13,7 +12,6 @@ const certificates = [
     issued: '2025',
     img: 'certificates/networking-basics.jpg',
     pdf: 'certificates/networking-basics.pdf',
-    credly: 'https://www.credly.com/earner/<your-credly>/badge/<badge-id>',
   },
   {
     title: 'JavaScript Essentials 1',
@@ -21,7 +19,6 @@ const certificates = [
     issued: '2025',
     img: 'certificates/javascript-essentials-1.jpg',
     pdf: 'certificates/javascript-essentials-1.pdf',
-    credly: 'https://www.credly.com/earner/<your-credly>/badge/<badge-id>',
   },
   {
     title: 'JavaScript Essentials 2',
@@ -29,7 +26,6 @@ const certificates = [
     issued: '2025',
     img: 'certificates/javascript-essentials-2.jpg',
     pdf: 'certificates/javascript-essentials-2.pdf',
-    credly: 'https://www.credly.com/earner/<your-credly>/badge/<badge-id>',
   },
 ];
 ---
@@ -126,7 +122,7 @@ const certificates = [
     <section style="margin: 22px 0 0">
       <h2 style="margin:.2rem 0 12px">Chứng chỉ</h2>
       <p style="color:var(--muted); margin: 0 0 12px">
-        Ảnh dưới đây là thumbnail (xuất từ PDF). Bạn có thể bấm “Xem PDF” để mở chứng chỉ đầy đủ hoặc “Xem trên Credly”.
+        Ảnh dưới đây là một số chứng chỉ đạt được, bạn có thể bấm “Xem PDF” để mở chứng chỉ đầy.
       </p>
       <div class="grid">
         {certificates.map((c) => (
@@ -142,7 +138,6 @@ const certificates = [
             <h3 style="margin:.4rem 0 .4rem">{c.title}</h3>
             <div style="display:flex; gap:10px; flex-wrap:wrap">
               <a class="btn" href={`${basePath}/${c.pdf}`} target="_blank" rel="noreferrer" aria-label={`Xem PDF: ${c.title}`}>📄 Xem PDF</a>
-              <a class="btn" style="background:linear-gradient(135deg,var(--brand),var(--primary))" href={c.credly} target="_blank" rel="noreferrer" aria-label={`Xem trên Credly: ${c.title}`}>🔗 Xem trên Credly</a>
             </div>
           </div>
         ))}
