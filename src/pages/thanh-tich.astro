@@ -5,36 +5,15 @@ import Footer from '../components/Footer.astro';
 
 const basePath = Astro.site ? new URL(Astro.site).pathname.replace(/\/$/, '') : '';
 
-const achievements = [
-  {
-    year: '2025',
-    title: 'Demo Socket Chat (Java + WebSocket)',
-    desc: 'Xây dựng mẫu chat thời gian thực, quản lý kết nối, broadcast message.',
-    tags: ['Java','WebSocket','Networking'],
-  },
-  {
-    year: '2024',
-    title: 'REST API Notes (Spring Boot)',
-    desc: 'API CRUD ghi chú, phân lớp Controller/Service/Repository, trả về JSON chuẩn.',
-    tags: ['Java','Spring Boot','REST'],
-  },
-  {
-    year: '2024',
-    title: 'CI/CD với GitHub Actions',
-    desc: 'Build SSG Astro, upload artifact và deploy GitHub Pages tự động.',
-    tags: ['CI/CD','GitHub Actions','Astro'],
-  },
-];
-
-// KHAI BÁO CHỨNG CHỈ: 
+// KHU VỰC CHỨNG CHỈ (giữ như cũ, cập nhật link/đường dẫn của bạn)
 const certificates = [
   {
     title: 'Networking Basics',
     issuer: 'Cisco Networking Academy',
     issued: '2025',
-    img: 'certificates/networking-basics.jpg',  // thumbnail (ảnh xuất từ PDF)
-    pdf: 'certificates/networking-basics.pdf',  // file PDF đầy đủ
-    
+    img: 'certificates/networking-basics.jpg',
+    pdf: 'certificates/networking-basics.pdf',
+    credly: 'https://www.credly.com/earner/<your-credly>/badge/<badge-id>',
   },
   {
     title: 'JavaScript Essentials 1',
@@ -42,7 +21,7 @@ const certificates = [
     issued: '2025',
     img: 'certificates/javascript-essentials-1.jpg',
     pdf: 'certificates/javascript-essentials-1.pdf',
-    
+    credly: 'https://www.credly.com/earner/<your-credly>/badge/<badge-id>',
   },
   {
     title: 'JavaScript Essentials 2',
@@ -50,35 +29,104 @@ const certificates = [
     issued: '2025',
     img: 'certificates/javascript-essentials-2.jpg',
     pdf: 'certificates/javascript-essentials-2.pdf',
-    
+    credly: 'https://www.credly.com/earner/<your-credly>/badge/<badge-id>',
   },
 ];
 ---
-<BaseLayout title="Thành tích • Lê Nguyễn Duy Khang" description="Một số dự án và chứng chỉ tiêu biểu.">
+<BaseLayout title="Thành tích • Lê Nguyễn Duy Khang" description="Các dự án mã nguồn mở và chứng chỉ tiêu biểu.">
   <Nav />
   <main class="container section">
     <h1>Thành tích</h1>
 
+    <!-- MỤC DỰ ÁN -->
     <section style="margin: 12px 0 26px">
-      <h2 style="margin:.2rem 0 12px">Dự án / Thành tích kỹ thuật</h2>
-      <div class="grid">
-        {achievements.map((a) => (
-          <div class="card">
-            <div class="meta">{a.year}</div>
-            <h3>{a.title}</h3>
-            <p style="color:var(--muted)">{a.desc}</p>
-            <div class="tags">
-              {a.tags.map((t) => <span class="tag">{t}</span>)}
+      <h2 style="margin:.2rem 0 8px">Dự án</h2>
+      <p style="color:var(--muted); margin:0 0 12px">
+        Một số dự án mã nguồn mở mình công khai trên GitHub, tập trung vào Java, JavaScript và lập trình mạng.
+        Danh sách dưới đây được cập nhật tự động và ưu tiên những repo có nhiều sao hoặc được cập nhật gần đây.
+      </p>
+
+      <div id="repo-grid" class="grid">
+        <!-- Skeleton khi đang tải -->
+        {Array.from({ length: 6 }).map(() => (
+          <div class="card repo-card skeleton">
+            <div class="sk-row sk-title"></div>
+            <div class="sk-row sk-text"></div>
+            <div class="sk-row sk-text short"></div>
+            <div class="sk-tags">
+              <span class="sk-chip"></span>
+              <span class="sk-chip"></span>
+              <span class="sk-chip"></span>
             </div>
           </div>
         ))}
       </div>
+
+      <script is:inline>
+        (async () => {
+          const username = 'KhangLearnCode';
+          const grid = document.getElementById('repo-grid');
+          try {
+            const resp = await fetch(`https://api.github.com/users/${username}/repos?per_page=100&sort=updated`);
+            if (!resp.ok) throw new Error('GitHub API error ' + resp.status);
+            const raw = await resp.json();
+            const repos = (Array.isArray(raw) ? raw : [])
+              .filter(r => !r.fork && !r.archived)
+              .map(r => ({
+                name: r.name,
+                html_url: r.html_url,
+                description: r.description || '',
+                language: r.language || '',
+                stars: r.stargazers_count || 0,
+                updated: r.pushed_at || r.updated_at || r.created_at,
+                topics: r.topics || [],
+              }))
+              .sort((a, b) => {
+                if (b.stars !== a.stars) return b.stars - a.stars;
+                return new Date(b.updated) - new Date(a.updated);
+              });
+
+            const top = repos.slice(0, 12);
+            if (!top.length) {
+              grid.innerHTML = '<div class="card"><p style="color:var(--muted)">Chưa có dự án công khai nào hoặc API giới hạn tạm thời. Vui lòng thử lại sau.</p></div>';
+              return;
+            }
+
+            const iconStar = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 2.6 5.3 5.9.9-4.3 4.2 1 5.9-5.2-2.7-5.2 2.7 1-5.9L3.5 8.2l5.9-.9L12 2Z"/></svg>';
+            const iconLang = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="6"/></svg>';
+            const fmtDate = (s) => new Date(s).toLocaleDateString('vi-VN');
+
+            grid.innerHTML = top.map(r => `
+              <div class="card repo-card">
+                <h3 style="margin:.1rem 0 .3rem">
+                  <a class="title-link" href="${r.html_url}" target="_blank" rel="noreferrer">${r.name}</a>
+                </h3>
+                ${r.description ? `<p class="repo-desc">${r.description}</p>` : ''}
+                <div class="repo-meta">
+                  <span title="Ngôn ngữ">${iconLang} ${r.language || '—'}</span>
+                  <span title="Số sao">${iconStar} ${r.stars}</span>
+                  <span title="Cập nhật">${fmtDate(r.updated)}</span>
+                </div>
+                ${r.topics?.length ? `
+                  <div class="repo-topics">
+                    ${r.topics.slice(0,6).map(t => `<span class="topic">${t}</span>`).join('')}
+                  </div>
+                ` : ''}
+              </div>
+            `).join('');
+          } catch (e) {
+            console.error(e);
+            grid.innerHTML = '<div class="card"><p style="color:var(--muted)">Không thể tải danh sách dự án từ GitHub ngay lúc này.</p></div>';
+          }
+        })();
+      </script>
     </section>
 
+    <!-- MỤC CHỨNG CHỈ -->
     <section style="margin: 22px 0 0">
       <h2 style="margin:.2rem 0 12px">Chứng chỉ</h2>
       <p style="color:var(--muted); margin: 0 0 12px">
-        Ảnh dưới đây là thumbnail. Bạn có thể bấm “Xem PDF” để mở chứng chỉ đầy đủ.
+        Ảnh dưới đây là thumbnail (xuất từ PDF). Bạn có thể bấm “Xem PDF” để mở chứng chỉ đầy đủ hoặc “Xem trên Credly”.
       </p>
       <div class="grid">
         {certificates.map((c) => (
@@ -94,6 +142,7 @@ const certificates = [
             <h3 style="margin:.4rem 0 .4rem">{c.title}</h3>
             <div style="display:flex; gap:10px; flex-wrap:wrap">
               <a class="btn" href={`${basePath}/${c.pdf}`} target="_blank" rel="noreferrer" aria-label={`Xem PDF: ${c.title}`}>📄 Xem PDF</a>
+              <a class="btn" style="background:linear-gradient(135deg,var(--brand),var(--primary))" href={c.credly} target="_blank" rel="noreferrer" aria-label={`Xem trên Credly: ${c.title}`}>🔗 Xem trên Credly</a>
             </div>
           </div>
         ))}
