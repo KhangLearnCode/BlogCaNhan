@@ -260,3 +260,39 @@ footer.site{
 @media (max-width: 640px){
   .post-hero{ padding-bottom: 72px; } /* thêm khoảng trống cho mobile */
 }
+
+.repo-card .repo-desc{
+  color: var(--muted);
+  margin: .25rem 0 .5rem;
+}
+.repo-meta{
+  display:flex; gap:12px; align-items:center;
+  color: var(--muted); font-size:.9rem; margin-top:.2rem;
+}
+.repo-meta span{ display:inline-flex; align-items:center; gap:6px }
+.repo-topics{ display:flex; gap:8px; flex-wrap:wrap; margin-top:.6rem }
+.topic{
+  color:#cffafe; background: rgba(34,211,238,.1);
+  border:1px solid rgba(34,211,238,.25);
+  padding:4px 10px; border-radius:999px; font-size:.78rem;
+}
+
+/* Skeleton loading */
+.skeleton{ position:relative; overflow:hidden }
+.sk-row{
+  height: 14px; background: rgba(255,255,255,.06); border-radius:8px;
+  margin: 10px 0;
+}
+.sk-title{ height: 20px; width: 70% }
+.sk-text.short{ width: 45% }
+.sk-tags{ display:flex; gap:8px; margin-top:8px }
+.sk-chip{
+  width: 60px; height: 20px; border-radius:999px;
+  background: rgba(255,255,255,.06);
+}
+.skeleton::after{
+  content:''; position:absolute; inset:0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.06), transparent);
+  animation: sk 1.4s infinite;
+}
+@keyframes sk{ 0%{ transform: translateX(-100%) } 100%{ transform: translateX(100%) } }
