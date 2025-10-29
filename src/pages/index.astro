@@ -7,32 +7,43 @@ import PostCard from '../components/PostCard.astro';
 const latest = await Astro.glob('./blog/*.md');
 latest.sort((a,b)=> new Date(b.frontmatter.pubDate||0).getTime() - new Date(a.frontmatter.pubDate||0).getTime());
 const top3 = latest.slice(0,3);
+
+// Prefix base khi deploy dưới subpath (ví dụ: /BlogCaNhan)
 const basePath = Astro.site ? new URL(Astro.site).pathname.replace(/\/$/, '') + '/' : '/';
 ---
-<BaseLayout title="Lê Nguyễn Duy Khang – Blog cá nhân" description="Portfolio blog của Lê Nguyễn Duy Khang: chia sẻ về Java, JavaScript và lập trình mạng máy tính.">
+<BaseLayout title="Lê Nguyễn Duy Khang – Blog cá nhân" description="Blog chia sẻ về Java, JavaScript và lập trình mạng (TCP/UDP, Socket, WebSocket). Ghi chú học tập, demo thực tế và kinh nghiệm triển khai.">
   <Nav />
   <main class="container">
     <section class="hero">
       <div>
         <h1>Xin chào, tôi là <span style="color:var(--primary)">Lê Nguyễn Duy Khang</span> 👋</h1>
-        <p>
-          Sinh viên năm 4 – Chuyên ngành Công nghệ Phần mềm, HUTECH.
-          Tôi xây dựng blog này để tổng hợp và chia sẻ kiến thức về Java, JavaScript
-          và đặc biệt là lập trình mạng máy tính.
+        <p style="color:var(--muted); font-size:1.05rem">
+          Sinh viên năm 4 Công nghệ Phần mềm (HUTECH). Tôi quan tâm tới <strong>Backend Java</strong>, 
+          <strong>lập trình mạng</strong> (TCP/UDP, Socket, WebSocket) và phát triển web với <strong>JavaScript</strong>.
+          Blog này là nơi tôi <strong>hệ thống hoá kiến thức</strong>, chia sẻ ghi chú học tập và các <strong>demo thực tế</strong>.
         </p>
-        <div class="badges">
+        <p style="color:var(--muted); margin:.6rem 0 1.1rem">
+          Mục tiêu của tôi là xây dựng các <strong>dịch vụ backend dễ dùng, an toàn và có thể mở rộng</strong>, 
+          đồng thời lan toả kiến thức cho cộng đồng thông qua các bài viết rõ ràng và có ví dụ kèm theo.
+        </p>
+
+        <div class="badges" aria-label="Lĩnh vực quan tâm">
           <span class="badge">Java</span>
-          <span class="badge">JavaScript</span>
+          <span class="badge">Spring Boot</span>
           <span class="badge">Networking</span>
-          <span class="badge">OOP</span>
-          <span class="badge">Web</span>
+          <span class="badge">WebSocket</span>
+          <span class="badge">REST API</span>
+          <span class="badge">JavaScript</span>
         </div>
+
         <div style="display:flex; gap:12px; flex-wrap:wrap">
           <a class="btn" href={`${basePath}blog`}>📝 Xem Blog</a>
-          <a class="btn" style="background:linear-gradient(135deg,var(--brand),var(--primary))" href="https://github.com/KhangLearnCode" target="_blank" rel="noreferrer">⭐ GitHub</a>
+          <a class="btn" style="background:linear-gradient(135deg,var(--brand),var(--primary))" href={`${basePath}about`}>👤 Về tôi</a>
+          <a class="btn" style="background:linear-gradient(135deg,var(--primary),var(--accent))" href={`${basePath}thanh-tich`}>🏆 Dự án & Chứng chỉ</a>
         </div>
       </div>
-      <div class="avatar">
+
+      <div class="avatar" aria-label="Ảnh đại diện">
         <img
           src={`${basePath}images/avatar.jpg`}
           alt="Ảnh đại diện của Lê Nguyễn Duy Khang"
@@ -45,16 +56,22 @@ const basePath = Astro.site ? new URL(Astro.site).pathname.replace(/\/$/, '') + 
     </section>
 
     <section class="section">
-      <h2 style="margin:0 0 16px">Bài viết mới</h2>
+      <h2 style="margin:0 0 12px">Bài viết mới</h2>
       <div class="grid">
         {top3.map((p) => (
-          <PostCard url={p.url} title={p.frontmatter.title} description={p.frontmatter.description} pubDate={p.frontmatter.pubDate} tags={p.frontmatter.tags} />
+          <PostCard
+            url={p.url}
+            title={p.frontmatter.title}
+            description={p.frontmatter.description}
+            pubDate={p.frontmatter.pubDate}
+            tags={p.frontmatter.tags}
+          />
         ))}
+      </div>
+      <div style="margin-top:14px">
+        <a class="badge" href={`${basePath}blog`}>Xem tất cả bài viết →</a>
       </div>
     </section>
   </main>
   <Footer />
 </BaseLayout>
-
-
-
