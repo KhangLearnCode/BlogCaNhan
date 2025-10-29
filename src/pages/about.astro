@@ -4,57 +4,79 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 
 const basePath = Astro.site ? new URL(Astro.site).pathname.replace(/\/$/, '') : '';
+const posts = await Astro.glob('./blog/*.md');
 ---
 <BaseLayout
-  title="About • Lê Nguyễn Duy Khang"
-  description="Giới thiệu chuyên nghiệp về Lê Nguyễn Duy Khang – sinh viên năm 4 HUTECH, định hướng Backend Java, JavaScript và lập trình mạng."
+  title="Về tôi • Lê Nguyễn Duy Khang"
+  description="Giới thiệu ngắn gọn và chuyên nghiệp về Lê Nguyễn Duy Khang – định hướng Backend Java, lập trình mạng và phát triển web."
 >
   <Nav />
   <main class="container section">
-    <h1>About</h1>
+    <h1>Về tôi</h1>
 
-    <section class="card" style="max-width:900px">
-      <h2 style="margin:.2rem 0 8px">Tóm tắt</h2>
-      <p style="color:var(--muted)">
-        Tôi là <strong>Lê Nguyễn Duy Khang</strong>, sinh viên năm 4 Chuyên ngành Công nghệ Phần mềm tại
-        <strong>HUTECH</strong>. TôiTôi tập trung vào <strong>Backend với Java</strong>, lập trình mạng
-        (TCP/UDP, Socket, WebSocket) và phát triển web với <strong>JavaScript</strong>.
-        Blog này ghi lại kiến thức học tập, các demo kỹ thuật và kinh nghiệm thực tế.
+    <section class="card" style="max-width:960px">
+      <h2 style="margin:.2rem 0 10px">Tóm tắt</h2>
+      <p style="color:var(--muted); font-size:1.05rem">
+        Tôi là <strong>Lê Nguyễn Duy Khang</strong>, sinh viên năm 4 Chuyên ngành Công nghệ Phần mềm – <strong>HUTECH</strong>.
+        Tôi tập trung vào <strong>Backend với Java</strong> và <strong>lập trình mạng</strong> (TCP/UDP, Socket, WebSocket),
+        đồng thời phát triển web bằng <strong>JavaScript</strong>. Blog được xây dựng để hệ thống hoá kiến thức,
+        chia sẻ các ghi chú triển khai và những ví dụ thực tế dễ áp dụng.
       </p>
+
+      <h2 style="margin:16px 0 8px">Triết lý học và làm</h2>
+      <ul>
+        <li><strong>Hiểu bản chất</strong>: Ưu tiên nắm nguyên lý (HTTP, TCP/IP, đồng bộ – bất đồng bộ) trước khi dùng framework.</li>
+        <li><strong>Đo lường & cải tiến</strong>: Thử nghiệm, benchmark nhỏ, rút kinh nghiệm có số liệu.</li>
+        <li><strong>Chia sẻ</strong>: Viết lại rõ ràng, có ví dụ, giúp người sau học nhanh hơn người trước.</li>
+      </ul>
 
       <h2 style="margin:16px 0 8px">Kỹ năng chính</h2>
       <ul>
-        <li><strong>Java, OOP</strong>: Collection, Concurrency cơ bản, I/O, NIO.</li>
-        <li><strong>Lập trình mạng</strong>: TCP/UDP Socket, thiết kế giao thức ứng dụng, mô hình server đa luồng.</li>
-        <li><strong>Web/REST</strong>: Spring Boot (REST API, Validation, Security cơ bản), JSON, HTTP.</li>
-        <li><strong>Frontend</strong>: JavaScript/DOM, Fetch API, WebSocket; SSG với <strong>Astro</strong>.</li>
-        <li><strong>DevOps cơ bản</strong>: Git/GitHub, GitHub Actions, deploy GitHub Pages.</li>
+        <li><strong>Java Core</strong>: Collection, Stream, I/O & NIO cơ bản, concurrency nền tảng.</li>
+        <li><strong>Lập trình mạng</strong>: TCP/UDP Socket, WebSocket, thiết kế giao thức ứng dụng, mô hình server đa luồng.</li>
+        <li><strong>Web/REST</strong>: Spring Boot cơ bản (Controller/Service/Repository, Validation, Security nền tảng), JSON/HTTP.</li>
+        <li><strong>Frontend</strong>: JavaScript/DOM, Fetch API, WebSocket; xây dựng site tĩnh với <strong>Astro</strong>.</li>
+        <li><strong>Công cụ</strong>: Git/GitHub, GitHub Actions (CI/CD), Docker cơ bản.</li>
       </ul>
 
-      <h2 style="margin:16px 0 8px">Định hướng</h2>
+      <h2 style="margin:16px 0 8px">Hiện đang quan tâm</h2>
       <p style="color:var(--muted)">
-        Trở thành <strong>Backend Engineer</strong> vững Java và hệ thống mạng, có khả năng thiết kế API dễ dùng,
-        bảo mật, quan sát được, và mở rộng tốt. Song song, tiếp tục chia sẻ kiến thức qua blog để đóng góp cho cộng đồng.
+        Tối ưu I/O, kiến trúc dịch vụ gọn nhẹ, bảo mật API, và cách thiết kế hệ thống dễ vận hành.
       </p>
 
-      <h2 style="margin:16px 0 8px">Học vấn</h2>
+      <h2 style="margin:16px 0 8px">Blog này có gì?</h2>
       <ul>
-        <li><strong>Đại học Công nghệ TP. Hồ Chí Minh (HUTECH)</strong> — Chuyên ngành Công nghệ Phần mềm.</li>
+        <li><strong>Bài viết kỹ thuật</strong> về Java, JavaScript, lập trình mạng, REST API.</li>
+        <li><strong>Demo</strong> nhỏ gọn minh hoạ nguyên lý, kèm hướng dẫn từng bước.</li>
+        <li><strong>Ghi chú triển khai</strong> thực tế: Astro SSG, GitHub Pages, CI/CD.</li>
       </ul>
-
-      <h2 style="margin:16px 0 8px">Liên hệ</h2>
-      <p>
-        <a href="https://www.facebook.com/duy.khang.423251" target="_blank" rel="noreferrer">Facebook</a> ·
-        <a href="https://github.com/KhangLearnCode" target="_blank" rel="noreferrer">GitHub</a> ·
-        <a href="mailto:lekhang1617@gmail.com">Email</a>
-      </p>
 
       <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:10px">
-        <a class="btn" href={`${basePath}/blog`}>📝 Xem Blog</a>
-        <a class="btn" style="background:linear-gradient(135deg,var(--brand),var(--primary))" href={`${basePath}/thanh-tich`}>🏆 Xem Thành tích</a>
+        <a class="btn" href={`${basePath}/blog`}>📝 Đọc Blog</a>
+        <a class="btn" style="background:linear-gradient(135deg,var(--brand),var(--primary))" href={`${basePath}/thanh-tich`}>🏆 Dự án & Chứng chỉ</a>
+        <a class="btn" style="background:linear-gradient(135deg,var(--primary),var(--accent))" href="https://github.com/KhangLearnCode" target="_blank" rel="noreferrer">⭐ GitHub</a>
+      </div>
+
+      <hr style="margin:18px 0; border-color: rgba(255,255,255,.08)" />
+
+      <div style="display:flex; gap:18px; flex-wrap:wrap">
+        <div class="card" style="flex:1; min-width:260px">
+          <strong>Thống kê Blog</strong>
+          <p style="color:var(--muted); margin:.4rem 0 0">
+            Tổng số bài viết hiện tại: <strong>{posts.length}</strong><br/>
+            Chủ đề chính: Java, JavaScript, Networking, REST API.
+          </p>
+        </div>
+        <div class="card" style="flex:1; min-width:260px">
+          <strong>Liên hệ</strong>
+          <p style="color:var(--muted); margin:.4rem 0 0">
+            <a href="mailto:lekhang1617@gmail.com">lekhang1617@gmail.com</a><br/>
+            <a href="https://www.facebook.com/duy.khang.423251" target="_blank" rel="noreferrer">Facebook</a> ·
+            <a href="https://github.com/KhangLearnCode" target="_blank" rel="noreferrer">GitHub</a>
+          </p>
+        </div>
       </div>
     </section>
   </main>
   <Footer />
 </BaseLayout>
-
