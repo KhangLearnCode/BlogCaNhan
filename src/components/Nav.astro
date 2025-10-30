@@ -3,7 +3,7 @@ const basePath = Astro.site ? new URL(Astro.site).pathname.replace(/\/$/, '') : 
 const nav = [
   { href: `${basePath}/blog`, label: 'Blog' },
   { href: `${basePath}/about`, label: 'Về tôi' },
-  { href: `${basePath}/thanh-tich`, label: 'Thành tích' },
+  { href: `${basePath}/thanh-tich`, label: 'Dự án' },
 ];
 ---
 <header class="site">
@@ -17,3 +17,4 @@ const nav = [
     </nav>
   </div>
 </header>
+
