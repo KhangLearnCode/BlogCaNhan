@@ -32,7 +32,7 @@ git push -u origin main
 - Vào Settings → Pages
 - Source: GitHub Actions
 - Sau khi workflow chạy xong (Actions tab), trang sẽ có link dạng:
-  https://khandlearncode.github.io/blog-ca-nhan-khang/
+  https://khanglearncode.github.io/blog-ca-nhan-khang/
 
 4) Tuỳ chọn cấu hình `site`/`base`
 - Nếu muốn đường dẫn tuyệt đối chính xác cho OG/canonical, chỉnh `site` trong `astro.config.mjs` thành URL Pages của repo.
@@ -51,3 +51,4 @@ git push -u origin main
 - Astro Docs: https://docs.astro.build/
 
 - GitHub Pages: https://pages.github.com/
+
