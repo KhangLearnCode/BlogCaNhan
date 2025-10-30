@@ -325,4 +325,5 @@ class HRApp {
 - Hãy chọn đúng công cụ: trừu tượng hóa qua `interface/abstract class`, tái sử dụng bằng **composition** trước, chỉ **kế thừa** khi thật sự “is-a”.
 - Viết code “hợp đồng trước, chi tiết sau”, kiểm soát bất biến để hệ thống ổn định, dễ mở rộng.
 
-> Bạn có muốn mình tạo một repo demo “java-oop-examples” chứa toàn bộ ví dụ trong bài (kèm Maven và test) để clone về chạy thử không? Hãy phản hồi “Đồng ý tạo repo demo”.
+
+
